@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: weekend-parttime
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: SECRET
+        generateValue: true
+      # 免费版无持久磁盘，SQLite 落在临时文件系统，每次重部署会重新注入演示数据。
+      # 如需持久化用户数据：升级到带 disk 的实例，并加一行 DB_PATH=/data/data.db
